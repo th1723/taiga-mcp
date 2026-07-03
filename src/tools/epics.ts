@@ -168,10 +168,10 @@ export function registerEpicTools(server: McpServer, client: TaigaClient) {
       epic_id: z.number().describe("Epic ID"),
       user_story: z.number().describe("User Story ID"),
     },
-    async ({ epic_id, ...body }) => {
+    async ({ epic_id, user_story }) => {
       const data = await client.post(
         `/epics/${epic_id}/related_userstories`,
-        body,
+        { epic: epic_id, user_story: user_story },
       );
       return {
         content: [
